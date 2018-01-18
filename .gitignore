@@ -1,0 +1,17 @@
+Annotations/*
+COCO/annotations/*
+COCO/images/*
+COCO/images_test/*
+preprocess_datas/*
+Questions/*
+weights/BOWQ_I/*
+weights/LSTM_Q/*
+weights/LSTMQ_I/*
+
+# keep folders
+!Annotations/.keep
+!COCO/annotations/.keep
+!COCO/images/.keep
+!COCO/images_test/.keep
+!preprocess_datas/.keep
+!Questions/.keep
