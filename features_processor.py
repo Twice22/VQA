@@ -7,7 +7,7 @@ import json
 
 # 4096 features for each 123287 images from the training + validation set
 # training (82,783 images) + validation (40,504 images) = 123287
-features = scipy.io.loadmat('preprocess_datas/VGG16_feats.mat')['features'] # change to use feats to test their features
+features = scipy.io.loadmat('preprocess_datas/VGG16_feats.mat')['features'] # change to use resnet_feats if you want
 word_embeddings = spacy.load('en_vectors_web_lg')
 
 # Load dictionary that maps image_id to index in the matrix X of size (4096, 123287)
@@ -142,7 +142,7 @@ def itot(images):
 		Returns:
 			img_embed (ndarray): A matrix of shape (nb_images, embeddings_size)
 	"""
-	img_embed = np.zeros((len(images), 4096)) # TODO: change hard-coded 4096
+	img_embed = np.zeros((len(images), 4096)) # TODO: change for 2048
 	
 	for idx, i in enumerate(images):
 		img_embed[idx] = features[:, img_id_to_idx["%s" % i]]

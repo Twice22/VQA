@@ -29,7 +29,7 @@ embedding_matrix = getEmbeddings(vocabulary)
 
 # ----------------------------------------- Create the model  ----------------------------------------- #
 
-img_dim = 4096
+img_dim = 2048 # TODO: change for 4096
 word2vec_dim = 300
 hidden_layers = 2
 
@@ -148,13 +148,13 @@ def generator(isTrain, batch_size):
 histories = cb.Histories()
 
 from keras.callbacks import ModelCheckpoint
-checkpointer = ModelCheckpoint(filepath='weights/LSTMQ_I/weights.{epoch:02d}-{val_loss:.2f}.hdf5', verbose=1, save_best_only=False)
+checkpointer = ModelCheckpoint(filepath='weights/LSTMQ_I/resnet_weights.{epoch:02d}-{val_loss:.2f}.hdf5', verbose=1, save_best_only=False) # TODO: delete resnet_
 model.fit_generator(generator(True, batch_size=batch_size), steps_per_epoch = samples_train, nb_epoch=epochs,
 					validation_data=generator(False, batch_size=batch_size),
 					callbacks=[checkpointer, histories], validation_steps=samples_val)
 
 # save validation, training acc/loss to csv files (to print result without retraining all the model from scratch)
-ltocsv(histories.train_loss, 'histories/LSTMQ_I/train_loss.csv')
-ltocsv(histories.val_loss, 'histories/LSTMQ_I/val_loss.csv')
-ltocsv(histories.train_acc, 'histories/LSTMQ_I/train_acc.csv')
-ltocsv(histories.val_acc, 'histories/LSTMQ_I/val_acc.csv')
+ltocsv(histories.train_loss, 'histories/LSTMQ_I/resnet_train_loss.csv') # delete resnet_
+ltocsv(histories.val_loss, 'histories/LSTMQ_I/resnet_val_loss.csv')
+ltocsv(histories.train_acc, 'histories/LSTMQ_I/resnet_train_acc.csv')
+ltocsv(histories.val_acc, 'histories/LSTMQ_I/resnet_val_acc.csv')

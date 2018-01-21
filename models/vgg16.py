@@ -1,12 +1,21 @@
 from keras.preprocessing import image
 from keras.models import Model
-from keras.applications.vgg16 import VGG16, preprocess_input
 import numpy as np
 
+## VGG16 model
+from keras.applications.vgg16 import VGG16, preprocess_input
 vgg16_model = VGG16(weights='imagenet', include_top=True)
 
 # get only the layer corresponding to the features
 vgg16_model_extractfeatures = Model(inputs=vgg16_model.input, outputs=vgg16_model.get_layer('fc2').output)
+
+
+## Resnet50 model
+from keras.applications.resnet50 import ResNet50, preprocess_input
+resnet_model = ResNet50(weights='imagenet', include_top=True)
+
+# get only the layer corresponding to the features
+resnet_model_extractfeatures = Model(inputs=resnet_model.input, outputs=resnet_model.get_layer('flatten_1').output)
 
 def path_to_tensor(img_path):
     # loads RGB image as PIL.Image.Image type
